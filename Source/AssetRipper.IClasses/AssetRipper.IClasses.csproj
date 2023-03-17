@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AssetRipper.Assets\AssetRipper.Assets.csproj" />
+    <ProjectReference Include="..\AssetRipper.GameChoiceClass\AssetRipper.GameChoiceClass.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AssetRipper.SourceGenerated">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>../Libraries/AssetRipper.SourceGenerated.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Utils\" />
+  </ItemGroup>
+
+</Project>

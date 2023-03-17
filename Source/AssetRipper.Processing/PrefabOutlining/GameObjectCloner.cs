@@ -1,9 +1,12 @@
 ﻿using AssetRipper.Assets;
 using AssetRipper.Assets.Cloning;
 using AssetRipper.Assets.Collections;
+using AssetRipper.GameChoiceClass;
 using AssetRipper.SourceGenerated;
 using AssetRipper.SourceGenerated.Classes.ClassID_1;
 using AssetRipper.SourceGenerated.Extensions;
+using System.Collections.Generic;
+using AssetRipper.Import.GICB2;
 
 namespace AssetRipper.Processing.PrefabOutlining
 {
@@ -14,7 +17,16 @@ namespace AssetRipper.Processing.PrefabOutlining
 			Dictionary<IUnityObjectBase, IUnityObjectBase> clonedAssetDictionary = new();
 			foreach (IUnityObjectBase asset in source.FetchHierarchy())
 			{
-				IUnityObjectBase clonedAsset = processedCollection.CreateAsset(asset.ClassID, AssetFactory.CreateAsset);
+				IUnityObjectBase clonedAsset;
+
+				if (GameChoice.GetGame() == GameFlags.GICB2)
+				{
+					clonedAsset = processedCollection.CreateAsset(asset.ClassID, AssetFactoryForGICB2.CreateAsset);
+				}
+				else
+				{
+					clonedAsset = processedCollection.CreateAsset(asset.ClassID, AssetFactory.CreateAsset); ;
+				}
 				clonedAssetDictionary.Add(asset, clonedAsset);
 			}
 			ClonedAssetResolver resolver = new ClonedAssetResolver(clonedAssetDictionary);

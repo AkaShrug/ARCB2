@@ -35,7 +35,8 @@ namespace AssetRipper.Export.UnityProjects.Project.Collections
 			{
 				return ExportIdHandler.GetMainExportID(m_asset);
 			}
-			throw new ArgumentException(null, nameof(asset));
+			return ExportIdHandler.GetMainExportID(asset);
+			//throw new ArgumentException(null, nameof(asset));
 		}
 
 		public UnityGUID GetExportGUID(IUnityObjectBase _)

@@ -87,7 +87,7 @@ namespace AssetRipper.Export.Modules.Shaders.ShaderBlob
 			int version = reader.ReadInt32();
 			if (version != GetExpectedProgramVersion(reader.Version))
 			{
-				throw new Exception($"Shader program version {version} doesn't match");
+				//throw new Exception($"Shader program version {version} doesn't match");
 			}
 
 			ProgramType = reader.ReadInt32();

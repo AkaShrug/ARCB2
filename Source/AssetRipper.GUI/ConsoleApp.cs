@@ -1,7 +1,9 @@
 ﻿using AssetRipper.Export.UnityProjects;
+using AssetRipper.GameChoiceClass;
 using AssetRipper.Import.Logging;
 using AssetRipper.Import.Utils;
 using AssetRipper.IO.Files.Streams.MultiFile;
+using AssetRipper.Processing;
 using System.CommandLine;
 using System.CommandLine.Builder;
 using System.CommandLine.Parsing;
@@ -114,6 +116,29 @@ namespace AssetRipper.GUI
 
 		private static void Run(IReadOnlyList<string> filesToExport, string outputDirectory)
 		{
+			GameChoice.SetGame(4);
+
+			if (GameChoice.GetGame() == GameFlags.SR)
+			{
+				Logger.Info(LogCategory.System, $"已选择游戏 Honkai : Star Rail CBT2 | 崩坏:星穹铁道 CBT2");
+			}
+			else if (GameChoice.GetGame() == GameFlags.ZZZ)
+			{
+				Logger.Info(LogCategory.System, $"已选择游戏 Zenless Zone Zero CBT1 | 绝区零 CBT1");
+			}
+			else if (GameChoice.GetGame() == GameFlags.BH3)
+			{
+				Logger.Info(LogCategory.System, $"已选择游戏 Honkai Impact 3 | 崩坏3");
+			}
+			else if (GameChoice.GetGame() == GameFlags.GI)
+			{
+				Logger.Info(LogCategory.System, $"已选择游戏 Genshin Impact | 原神开发版");
+			}
+			else if (GameChoice.GetGame() == GameFlags.GICB2)
+			{
+				Logger.Info(LogCategory.System, $"已选择游戏 Genshin Impact CBT2 | 原神 CBT2");
+				GenshinPathUtils.InitGenshinHashTable();
+			}
 			Logger.LogSystemInformation("AssetRipper Console Version");
 
 			Ripper ripper = new();

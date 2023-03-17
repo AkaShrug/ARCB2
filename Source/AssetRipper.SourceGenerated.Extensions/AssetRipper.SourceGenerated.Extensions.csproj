@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\AssetRipper.Assets\AssetRipper.Assets.csproj" />
+		<ProjectReference Include="..\AssetRipper.IClasses\AssetRipper.IClasses.csproj" />
 		<ProjectReference Include="..\AssetRipper.Numerics\AssetRipper.Numerics.csproj" />
 	</ItemGroup>
 

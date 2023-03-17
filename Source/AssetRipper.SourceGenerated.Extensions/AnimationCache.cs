@@ -3,6 +3,7 @@ using AssetRipper.Assets.Bundles;
 using AssetRipper.SourceGenerated.Classes.ClassID_111;
 using AssetRipper.SourceGenerated.Classes.ClassID_90;
 using AssetRipper.SourceGenerated.Classes.ClassID_95;
+using AssetRipper.IClasses.Animation;
 
 namespace AssetRipper.SourceGenerated.Extensions
 {
@@ -11,6 +12,7 @@ namespace AssetRipper.SourceGenerated.Extensions
 		public List<IAvatar> CachedAvatars = new();
 		public List<IAnimator> CachedAnimators = new();
 		public List<IAnimation> CachedAnimations = new();
+		public List<IAnimation_ACL> CachedAnimations_ACL = new();
 
 		private void CacheAssets(Bundle bundle)
 		{
@@ -26,6 +28,9 @@ namespace AssetRipper.SourceGenerated.Extensions
 						break;
 					case IAnimation animation:
 						CachedAnimations.Add(animation);
+						break;
+					case IAnimation_ACL animation_ACL:
+						CachedAnimations_ACL.Add(animation_ACL);
 						break;
 				}
 			}

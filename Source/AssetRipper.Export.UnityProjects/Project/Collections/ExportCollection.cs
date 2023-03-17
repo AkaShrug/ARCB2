@@ -4,6 +4,8 @@ using AssetRipper.Assets.Export;
 using AssetRipper.Assets.Interfaces;
 using AssetRipper.Assets.Metadata;
 using AssetRipper.Export.UnityProjects.Project.Exporters;
+using AssetRipper.IClasses.AnimationClip;
+using AssetRipper.IClasses.IAnimatorController;
 using AssetRipper.Import.IO;
 using AssetRipper.IO.Files.SerializedFiles;
 using AssetRipper.IO.Files.Utils;
@@ -101,7 +103,9 @@ namespace AssetRipper.Export.UnityProjects.Project.Collections
 				IShader => "shader",
 				IMaterial => "mat",
 				IAnimationClip => "anim",
+				IAnimationClip_ACL => "anim",
 				IAnimatorController => "controller",
+				IAnimatorController_ACL => "controller",
 				IAnimatorOverrideController => "overrideController",
 				IAudioMixerController => "mixer",
 				IAvatarMaskMarker => "mask",

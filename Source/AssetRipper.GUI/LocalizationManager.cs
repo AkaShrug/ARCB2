@@ -1,5 +1,7 @@
 ﻿using AssetRipper.GUI.Localizations;
 using AssetRipper.Import.Logging;
+using AssetRipper.Processing;
+using AssetRipper.GameChoiceClass;
 using System.Diagnostics.CodeAnalysis;
 
 namespace AssetRipper.GUI
@@ -16,6 +18,9 @@ namespace AssetRipper.GUI
 
 		public LocalizationManager()
 		{
+			GameChoice.SetGame(4);
+			GenshinPathUtils.InitGenshinHashTable();
+			
 			LoadLanguage("en_US");
 			FallbackLocale = CurrentLocale;
 

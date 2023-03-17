@@ -3,6 +3,7 @@ using AssetRipper.Assets.IO.Reading;
 using AssetRipper.Assets.IO.Writing;
 using AssetRipper.Import.IO.Extensions;
 using AssetRipper.Import.Utils;
+using AssetRipper.GameChoiceClass;
 using K4os.Compression.LZ4;
 
 namespace AssetRipper.Export.Modules.Shaders.ShaderBlob
@@ -24,7 +25,14 @@ namespace AssetRipper.Export.Modules.Shaders.ShaderBlob
 		private void ReadBlob(AssetCollection shaderCollection, byte[] compressedBlob, uint offset, uint compressedLength, uint decompressedLength, int segment)
 		{
 			byte[] decompressedBuffer = new byte[decompressedLength];
-			LZ4Codec.Decode(compressedBlob, (int)offset, (int)compressedLength, decompressedBuffer, 0, (int)decompressedLength);
+			if (GameChoice.GetGame() == GameFlags.GICB2)
+			{
+				Buffer.BlockCopy(compressedBlob, (int)offset, decompressedBuffer, 0, (int)decompressedLength);
+			}
+			else
+			{
+				LZ4Codec.Decode(compressedBlob, (int)offset, (int)compressedLength, decompressedBuffer, 0, (int)decompressedLength);
+			}
 
 			using MemoryStream blobMem = new MemoryStream(decompressedBuffer);
 			using AssetReader blobReader = new AssetReader(blobMem, shaderCollection);

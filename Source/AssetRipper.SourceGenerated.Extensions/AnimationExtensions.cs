@@ -1,4 +1,7 @@
 ﻿using AssetRipper.Assets.Metadata;
+using AssetRipper.IClasses.Animation;
+using AssetRipper.IClasses.AnimationClip;
+using AssetRipper.IClasses.PPtr_AnimationClip;
 using AssetRipper.SourceGenerated.Classes.ClassID_111;
 using AssetRipper.SourceGenerated.Classes.ClassID_74;
 using AssetRipper.SourceGenerated.Enums;
@@ -11,6 +14,30 @@ namespace AssetRipper.SourceGenerated.Extensions
 		public static bool IsContainsAnimationClip(this IAnimation animation, IAnimationClip clip)
 		{
 			foreach (IPPtr_AnimationClip clipPtr in animation.Animations_C111)
+			{
+				if (clipPtr.IsAsset(animation.Collection, clip))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public static bool IsContainsAnimationClip(this IAnimation animation, IAnimationClip_ACL clip)
+		{
+			foreach (IPPtr_AnimationClip clipPtr in animation.Animations_C111)
+			{
+				if (clipPtr.IsAsset(animation.Collection, clip))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public static bool IsContainsAnimationClip(this IAnimation_ACL animation, IAnimationClip_ACL clip)
+		{
+			foreach (IPPtr_AnimationClip_ACL clipPtr in animation.Animations_C111)
 			{
 				if (clipPtr.IsAsset(animation.Collection, clip))
 				{

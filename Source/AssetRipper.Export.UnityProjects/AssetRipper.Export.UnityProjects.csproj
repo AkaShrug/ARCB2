@@ -39,6 +39,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Reference Include="HLSLccWrapper">
+		<HintPath>Libraries/x64/HLSLccWrapper_x64.dll</HintPath>
+	  </Reference>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ContentWithTargetPath Include="Libraries\x64\crunch_x64.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<TargetPath>crunch.dll</TargetPath>
@@ -46,6 +52,10 @@
 		<ContentWithTargetPath Include="Libraries\x64\crunchunity_x64.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<TargetPath>crunchunity.dll</TargetPath>
+		</ContentWithTargetPath>
+		<ContentWithTargetPath Include="Libraries\x64\HLSLccWrapper_x64.dll">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<TargetPath>HLSLccWrapper_x64.dll</TargetPath>
 		</ContentWithTargetPath>
 	</ItemGroup>
 

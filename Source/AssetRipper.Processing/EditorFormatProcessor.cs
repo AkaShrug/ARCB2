@@ -28,6 +28,10 @@ using AssetRipper.SourceGenerated.Extensions;
 using AssetRipper.SourceGenerated.Subclasses.AssetInfo;
 using AssetRipper.SourceGenerated.Subclasses.PPtr_Object;
 using AssetRipper.SourceGenerated.Subclasses.Utf8String;
+using System.IO;
+using System.Linq;
+using AssetRipper.GameChoiceClass;
+using AssetRipper.IClasses.AnimationClip;
 
 namespace AssetRipper.Processing
 {
@@ -104,6 +108,9 @@ namespace AssetRipper.Processing
 				case IAnimationClip animationClip:
 					AnimationClipConverter.Process(animationClip, currentAnimationCache!);
 					break;
+				case IAnimationClip_ACL animationClip_ACL:
+					AnimationClipConverter_ACL.Process(animationClip_ACL, currentAnimationCache!);
+					break;
 				case ITerrain terrain:
 					terrain.ConvertToEditorFormat();
 					break;
@@ -172,9 +179,9 @@ namespace AssetRipper.Processing
 		{
 			string bundleName = bundle.GetAssetBundleName();
 			string bundleDirectory = bundleName + ObjectUtils.DirectorySeparator;
-			string directory = Path.Combine(AssetBundleFullPath, bundleName);
 			foreach (AccessPairBase<Utf8String, IAssetInfo> kvp in bundle.Container_C142)
 			{
+				string directory = Path.Combine(AssetBundleFullPath, bundleName);
 				// skip shared bundle assets, because we need to export them in their bundle directory
 				if (kvp.Value.Asset.FileID != 0)
 				{
@@ -190,6 +197,23 @@ namespace AssetRipper.Processing
 				asset.AssetBundleName = bundleName;
 
 				string assetPath = EnsurePathNotRooted(kvp.Key.String);
+
+				if (GameChoice.GetGame() == GameFlags.GICB2)
+				{
+					string newPath = null;
+					try
+					{
+						newPath = GenshinPathUtils.LoadGenshinHashTable(assetPath);
+					}
+					catch { }
+
+					if (newPath != null)
+					{
+						directory = Path.Combine(directory, "..\\..");
+						assetPath = newPath;
+					}
+				}
+
 				if (string.IsNullOrEmpty(assetPath))
 				{
 					continue;

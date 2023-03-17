@@ -4,6 +4,7 @@ using AssetRipper.Assets.Interfaces;
 using AssetRipper.Assets.IO;
 using AssetRipper.Assets.IO.Reading;
 using AssetRipper.Assets.Metadata;
+using AssetRipper.GameChoiceClass;
 using AssetRipper.Import.Classes;
 using AssetRipper.Import.Logging;
 using AssetRipper.Import.Structure.Assembly;
@@ -34,6 +35,7 @@ using AssetRipper.SourceGenerated.Subclasses.Vector2Int;
 using AssetRipper.SourceGenerated.Subclasses.Vector3f;
 using AssetRipper.SourceGenerated.Subclasses.Vector3Int;
 using AssetRipper.SourceGenerated.Subclasses.Vector4f;
+using AssetRipper.Import.GICB2;
 
 namespace AssetRipper.Import.Structure
 {
@@ -48,7 +50,16 @@ namespace AssetRipper.Import.Structure
 
 		public override IUnityObjectBase? ReadAsset(AssetInfo assetInfo, AssetReader reader, int size, SerializedType? type)
 		{
-			IUnityObjectBase? asset = AssetFactory.CreateAsset(reader.Version, assetInfo);
+
+			IUnityObjectBase? asset;
+			if (GameChoice.GetGame() == GameFlags.GICB2)
+			{
+				asset = AssetFactoryForGICB2.CreateAsset(reader.Version, assetInfo);
+			}
+			else
+			{
+				asset = AssetFactory.CreateAsset(reader.Version, assetInfo);
+			}
 
 			return asset switch
 			{
