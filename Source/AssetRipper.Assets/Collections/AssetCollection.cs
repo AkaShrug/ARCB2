@@ -1,10 +1,12 @@
 ﻿using AssetRipper.Assets.Bundles;
 using AssetRipper.Assets.Exceptions;
+using AssetRipper.Assets.Interfaces;
 using AssetRipper.Assets.Metadata;
 using AssetRipper.IO.Endian;
 using AssetRipper.IO.Files;
 using AssetRipper.IO.Files.SerializedFiles;
 using AssetRipper.VersionUtilities;
+using Microsoft.VisualBasic;
 using System.Collections;
 
 namespace AssetRipper.Assets.Collections;
@@ -118,6 +120,10 @@ public abstract class AssetCollection : IReadOnlyCollection<IUnityObjectBase>, I
 		//Debug.Assert(asset.Collection == this, "Asset info must marked this as its collection.");
 		//Debug.Assert(!deletedAssets.ContainsKey(asset.PathID), $"Path ID {asset.PathID} in {Name} is reserved for a deleted asset.");
 		//Debug.Assert(asset.PathID is not 0, "The zero path ID is reserved for null PPtr's.");
+		if (!Utils.GenshinUtils.stringSet.Contains(asset.ToString()))
+		{
+			Utils.GenshinUtils.stringSet.Add(asset.ToString());
+		}
 
 		assets.TryAdd(asset.PathID, asset);
 	}

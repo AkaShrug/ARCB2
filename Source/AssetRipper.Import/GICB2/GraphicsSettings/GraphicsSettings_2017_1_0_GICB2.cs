@@ -869,6 +869,9 @@ namespace AssetRipper.Import.GICB2.GraphicsSettings
 			}
 		}
 
+		public bool CameraRelativeLightCulling_C30 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public bool CameraRelativeShadowCulling_C30 { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
 		// Token: 0x0602AD7A RID: 175482 RVA: 0x00608A99 File Offset: 0x00606C99
 		public GraphicsSettings_2017_1_0_GICB2()
 			: this(AssetInfo.MakeDummyAssetInfo(30))
@@ -1559,6 +1562,16 @@ namespace AssetRipper.Import.GICB2.GraphicsSettings
 		public override List<TypeTreeNode> MakeReleaseTypeTreeNodes(int depth, int startingIndex)
 		{
 			throw new NotSupportedException();
+		}
+
+		public bool Has_CameraRelativeLightCulling_C30()
+		{
+			throw new NotImplementedException();
+		}
+
+		public bool Has_CameraRelativeShadowCulling_C30()
+		{
+			throw new NotImplementedException();
 		}
 
 		// Token: 0x040124B2 RID: 74930

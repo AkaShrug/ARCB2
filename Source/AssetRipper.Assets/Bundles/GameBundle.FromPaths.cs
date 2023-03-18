@@ -6,7 +6,6 @@ using AssetRipper.IO.Files.CompressedFiles;
 using AssetRipper.IO.Files.ResourceFiles;
 using AssetRipper.IO.Files.SerializedFiles;
 using AssetRipper.IO.Files.SerializedFiles.Parser;
-
 namespace AssetRipper.Assets.Bundles;
 
 partial class GameBundle
@@ -34,6 +33,8 @@ partial class GameBundle
 				AddResource(resourceFile);
 			}
 		}
+
+		File.WriteAllLines("assetAllName.txt", Utils.GenshinUtils.stringSet);
 	}
 
 	private static Stack<FileBase> LoadAndSortFiles(IEnumerable<string> paths, IDependencyProvider dependencyProvider)
