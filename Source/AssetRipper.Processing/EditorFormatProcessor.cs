@@ -203,7 +203,7 @@ namespace AssetRipper.Processing
 					string newPath = null;
 					try
 					{
-						newPath = GenshinPathUtils.LoadGenshinHashTable(assetPath);
+						newPath = GenshinUtils.LoadGenshinHashTable(assetPath);
 					}
 					catch { }
 

@@ -48,6 +48,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Update="AllUnityStringHash.txt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	  <None Update="index.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>

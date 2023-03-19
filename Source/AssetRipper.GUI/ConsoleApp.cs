@@ -137,7 +137,8 @@ namespace AssetRipper.GUI
 			else if (GameChoice.GetGame() == GameFlags.GICB2)
 			{
 				Logger.Info(LogCategory.System, $"已选择游戏 Genshin Impact CBT2 | 原神 CBT2");
-				GenshinPathUtils.InitGenshinHashTable();
+				GenshinUtils.InitGenshinHashTable();
+				GenshinUtils.LoadGenshinAnimPathHash();
 			}
 			Logger.LogSystemInformation("AssetRipper Console Version");
 

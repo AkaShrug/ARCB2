@@ -34,7 +34,7 @@ partial class GameBundle
 			}
 		}
 
-		File.WriteAllLines("assetAllName.txt", Utils.GenshinUtils.stringSet);
+		File.WriteAllLines("assetAllName.txt", GenshinUtils.assetNameset);
 	}
 
 	private static Stack<FileBase> LoadAndSortFiles(IEnumerable<string> paths, IDependencyProvider dependencyProvider)

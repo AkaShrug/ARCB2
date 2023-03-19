@@ -120,9 +120,9 @@ public abstract class AssetCollection : IReadOnlyCollection<IUnityObjectBase>, I
 		//Debug.Assert(asset.Collection == this, "Asset info must marked this as its collection.");
 		//Debug.Assert(!deletedAssets.ContainsKey(asset.PathID), $"Path ID {asset.PathID} in {Name} is reserved for a deleted asset.");
 		//Debug.Assert(asset.PathID is not 0, "The zero path ID is reserved for null PPtr's.");
-		if (!Utils.GenshinUtils.stringSet.Contains(asset.ToString()))
+		if (!GenshinUtils.assetNameset.Contains(asset.ToString()))
 		{
-			Utils.GenshinUtils.stringSet.Add(asset.ToString());
+			GenshinUtils.assetNameset.Add(asset.ToString());
 		}
 
 		assets.TryAdd(asset.PathID, asset);

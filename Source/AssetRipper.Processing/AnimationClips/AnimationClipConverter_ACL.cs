@@ -30,6 +30,7 @@ using System.Text.RegularExpressions;
 using AssetRipper.IClasses.AnimationClip;
 using AssetRipper.IClasses.Clip;
 using AssetRipper.Processing.AnimationClips.ACL;
+using AssetRipper.Import.Logging;
 
 namespace AssetRipper.Processing.AnimationClips
 {
@@ -538,6 +539,13 @@ namespace AssetRipper.Processing.AnimationClips
 		private void AddScriptCurve(IGenericBinding binding, string path, float time, float value)
 		{
 #warning TODO:
+			if (GenshinUtils.animPathHash.ContainsKey(binding.Attribute))
+			{
+				CurveData curve1 = new CurveData(path, GenshinUtils.animPathHash[binding.Attribute], ClassIDType.MonoBehaviour, binding.Script.FileID, binding.Script.PathID);
+				AddFloatKeyframe(curve1, time, value);
+				return;
+			}
+				Logger.Warning("检查到未知hash: " + ScriptPropertyPrefix + binding.Attribute);
 			CurveData curve = new CurveData(path, ScriptPropertyPrefix + binding.Attribute, ClassIDType.MonoBehaviour, binding.Script.FileID, binding.Script.PathID);
 			AddFloatKeyframe(curve, time, value);
 		}
@@ -545,6 +553,13 @@ namespace AssetRipper.Processing.AnimationClips
 		private void AddEngineCurve(IGenericBinding binding, string path, float time, float value)
 		{
 #warning TODO:
+			if (GenshinUtils.animPathHash.ContainsKey(binding.Attribute))
+			{
+				CurveData curve1 = new CurveData(path, GenshinUtils.animPathHash[binding.Attribute], ClassIDType.MonoBehaviour, binding.Script.FileID, binding.Script.PathID);
+				AddFloatKeyframe(curve1, time, value);
+				return;
+			}
+				Logger.Warning("检查到未知hash" + TypeTreePropertyPrefix + binding.Attribute);
 			CurveData curve = new CurveData(path, TypeTreePropertyPrefix + binding.Attribute, binding.GetClassID());
 			AddFloatKeyframe(curve, time, value);
 		}
@@ -635,8 +650,13 @@ namespace AssetRipper.Processing.AnimationClips
 			{
 				return path;
 			}
+			else if (GenshinUtils.animPathHash.ContainsKey(hash))
+			{
+				return GenshinUtils.animPathHash[hash];
+			}
 			else
 			{
+				Logger.Warning("检查到未知hash: " + UnknownPathPrefix + hash);
 				return UnknownPathPrefix + hash;
 			}
 		}

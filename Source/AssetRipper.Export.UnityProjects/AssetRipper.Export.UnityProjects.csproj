@@ -74,4 +74,10 @@
 		<None Remove="C:\Users\**\.nuget\packages\naudio.vorbis\**\README.md" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Libraries\x64\HLSLccWrapper_x64.dll">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

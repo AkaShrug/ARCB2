@@ -19,7 +19,8 @@ namespace AssetRipper.GUI
 		public LocalizationManager()
 		{
 			GameChoice.SetGame(4);
-			GenshinPathUtils.InitGenshinHashTable();
+			GenshinUtils.InitGenshinHashTable();
+			GenshinUtils.LoadGenshinAnimPathHash();
 			
 			LoadLanguage("en_US");
 			FallbackLocale = CurrentLocale;
