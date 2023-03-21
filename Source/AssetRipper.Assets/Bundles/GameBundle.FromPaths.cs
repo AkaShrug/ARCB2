@@ -33,8 +33,6 @@ partial class GameBundle
 				AddResource(resourceFile);
 			}
 		}
-
-		File.WriteAllLines("assetAllName.txt", GenshinUtils.assetNameset);
 	}
 
 	private static Stack<FileBase> LoadAndSortFiles(IEnumerable<string> paths, IDependencyProvider dependencyProvider)

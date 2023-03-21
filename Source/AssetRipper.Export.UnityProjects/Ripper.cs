@@ -115,6 +115,8 @@ namespace AssetRipper.Export.UnityProjects
 				processor.Process(GameStructure.FileCollection, version);
 			}
 			Logger.Info(LogCategory.General, "Finished processing assets");
+			File.WriteAllLines("assetAllName.txt", GenshinUtils.assetNameset);
+			Logger.Info(LogCategory.General, "保存全对象名称以计算动画hash");
 
 			return GameStructure;
 

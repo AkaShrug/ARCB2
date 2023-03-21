@@ -196,6 +196,10 @@ namespace AssetRipper.Processing
 
 				asset.AssetBundleName = bundleName;
 
+				if (!GenshinUtils.assetNameset.Contains(bundleName))
+				{
+					GenshinUtils.assetNameset.Add(bundleName);
+				}
 				string assetPath = EnsurePathNotRooted(kvp.Key.String);
 
 				if (GameChoice.GetGame() == GameFlags.GICB2)
