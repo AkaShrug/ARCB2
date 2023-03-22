@@ -5,6 +5,7 @@ using AssetRipper.SourceGenerated;
 using AssetRipper.SourceGenerated.Classes.ClassID_1;
 using AssetRipper.SourceGenerated.Classes.ClassID_1001;
 using AssetRipper.SourceGenerated.Classes.ClassID_18;
+using AssetRipper.SourceGenerated.Classes.ClassID_4;
 using AssetRipper.SourceGenerated.Extensions;
 using AssetRipper.SourceGenerated.MarkerInterfaces;
 using AssetRipper.SourceGenerated.Subclasses.PPtr_EditorExtension;
@@ -56,7 +57,76 @@ public sealed class PrefabProcessor : IAssetProcessor
 				}
 			}
 		}
+		var gameObjectTree = GetGameObjectTree(gameObjects);
+		string filePath = "GameObjectTree.txt";
+		using (StreamWriter writer = new StreamWriter(filePath))
+		{
+			foreach (string line in gameObjectTree)
+			{
+				writer.WriteLine(line);
+			}
+		}
 	}
+
+	private List<string> GetGameObjectTree(HashSet<IGameObject> gameObjects)
+	{
+		List<string> objectPaths = new List<string>();
+
+		foreach (IGameObject gameObject in gameObjects)
+		{
+			string path = gameObject.NameString;
+			IGameObject parent = null;
+
+			// 获取当前游戏对象的 Transform 组件
+			ITransform transform = gameObject.GetComponentAccessList().OfType<ITransform>().FirstOrDefault();
+			if (transform == null)
+				continue;
+
+			// 查找父游戏对象
+			foreach (IGameObject potentialParent in gameObjects)
+			{
+				ITransform parentTransform = potentialParent.GetComponentAccessList().OfType<ITransform>().FirstOrDefault();
+				if (parentTransform == null)
+					continue;
+
+				if (parentTransform.Children_C4P.Contains(transform))
+				{
+					parent = potentialParent;
+					break;
+				}
+			}
+
+			// 生成路径
+			while (parent != null)
+			{
+				path = parent.NameString + "/" + path;
+
+				// 更新当前游戏对象和 Transform 组件
+				//gameObject = parent;
+				transform = parent.GetComponentAccessList().OfType<ITransform>().FirstOrDefault();
+
+				// 查找新的父游戏对象
+				parent = null;
+				foreach (IGameObject potentialParent in gameObjects)
+				{
+					ITransform parentTransform = potentialParent.GetComponentAccessList().OfType<ITransform>().FirstOrDefault();
+					if (parentTransform == null)
+						continue;
+
+					if (parentTransform.Children_C4P.Contains(transform))
+					{
+						parent = potentialParent;
+						break;
+					}
+				}
+			}
+
+			objectPaths.Add(path);
+		}
+
+		return objectPaths;
+	}
+
 
 	private static IPrefabInstance CreatePrefab(ProcessedAssetCollection virtualFile, IGameObject root)
 	{
