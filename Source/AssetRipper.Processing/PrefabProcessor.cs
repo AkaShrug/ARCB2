@@ -86,10 +86,9 @@ public sealed class PrefabProcessor : IAssetProcessor
 			while (parent != null)
 			{
 				path = parent.GameObject_C4P.NameString + "/" + path;
+				objectPaths.Add(path);
 				parent = parent.Father_C4P;
 			}
-
-			objectPaths.Add(path);
 		}
 
 		return objectPaths;

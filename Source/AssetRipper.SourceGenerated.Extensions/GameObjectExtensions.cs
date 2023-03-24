@@ -229,6 +229,7 @@ namespace AssetRipper.SourceGenerated.Extensions
 			foreach (ITransform? child in transform.Children_C4P.ThrowIfNull())
 			{
 				IGameObject childGO = child.GameObject_C4P ?? throw new NullReferenceException("GameObject for Transform cannot be null.");
+				child.Father_C4P = transform;
 				foreach (IEditorExtension childElement in childGO.FetchHierarchy())
 				{
 					yield return childElement;
