@@ -74,51 +74,19 @@ public sealed class PrefabProcessor : IAssetProcessor
 
 		foreach (IGameObject gameObject in gameObjects)
 		{
-			string path = gameObject.NameString;
-			IGameObject parent = null;
-
 			// 获取当前游戏对象的 Transform 组件
 			ITransform transform = gameObject.GetComponentAccessList().OfType<ITransform>().FirstOrDefault();
 			if (transform == null)
 				continue;
 
-			// 查找父游戏对象
-			foreach (IGameObject potentialParent in gameObjects)
-			{
-				ITransform parentTransform = potentialParent.GetComponentAccessList().OfType<ITransform>().FirstOrDefault();
-				if (parentTransform == null)
-					continue;
-
-				if (parentTransform.Children_C4P.Contains(transform))
-				{
-					parent = potentialParent;
-					break;
-				}
-			}
+			string path = gameObject.NameString;
+			ITransform parent = transform.Father_C4P;
 
 			// 生成路径
 			while (parent != null)
 			{
-				path = parent.NameString + "/" + path;
-
-				// 更新当前游戏对象和 Transform 组件
-				//gameObject = parent;
-				transform = parent.GetComponentAccessList().OfType<ITransform>().FirstOrDefault();
-
-				// 查找新的父游戏对象
-				parent = null;
-				foreach (IGameObject potentialParent in gameObjects)
-				{
-					ITransform parentTransform = potentialParent.GetComponentAccessList().OfType<ITransform>().FirstOrDefault();
-					if (parentTransform == null)
-						continue;
-
-					if (parentTransform.Children_C4P.Contains(transform))
-					{
-						parent = potentialParent;
-						break;
-					}
-				}
+				path = parent.GameObject_C4P.NameString + "/" + path;
+				parent = parent.Father_C4P;
 			}
 
 			objectPaths.Add(path);
